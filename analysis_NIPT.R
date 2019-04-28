@@ -1,9 +1,11 @@
-# pzw
-# 20190318
+#安装包
+install.packages("sets") 
+source("http://bioconductor.org/biocLite.R") 
+biocLite("Rsamtools") 
+install.packages("NIPTeR")
 
+# 加载包
 library(NIPTeR)
-
-# setwd("~/workspace/project/NIPT")
 
 # 读入参考组，正常情况下参考组应由自己实验室检测数据组成
 NIPT_87_control_group <- readRDS(file="NIPTeR_cleaned_87_controls.rds")
@@ -31,7 +33,7 @@ mean_match_sample <- mean(as.numeric(
   ))
 
 
-####### 计算标准Z-score ########
+#计算标准Z-score 
 # 正常范围为[-3, 3]。当超出正常范围时，认为三体风险较高
 
 
@@ -56,7 +58,7 @@ z_score_21$sample_Zscore
 
 
 
-########### 计算归一化Z-score #############
+ #计算归一化Z-score 
 # 正常范围为[-3, 3]。当超出正常范围时，认为三体风险较高
 
 
@@ -84,8 +86,7 @@ ncv_score_21 <- calculate_ncv_score(nipt_sample=NIPT_bin_chi_corrected_sample,
                                     ncv_template=ncv_template_21)
 ncv_score_21$sample_score
 
-
-########### 计算线性回归 Z-score #############
+ #计算线性回归 Z-score 
 # 正常范围为[-3, 3]。当超出正常范围时，认为三体风险较高
 
 
